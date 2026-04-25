@@ -48,7 +48,7 @@ local function activateMerchant()
                 if item:IsA("Frame") and item.Parent:IsA("ScrollingFrame") then
                     local isExpired = false
                     -- Проверяем текст внутри карточки товара
-                    for _, subItem in pairs(item:GetDescendants()) do
+                  --[[  for _, subItem in pairs(item:GetDescendants()) do
                         if (subItem:IsA("TextLabel") or subItem:IsA("TextButton")) then
                             local t = subItem.Text:lower()
                             if t:find("истёк") or t:find("распродано") or t:find("expired") or t:find("sold out") then
@@ -56,7 +56,7 @@ local function activateMerchant()
                                 break
                             end
                         end
-                    end
+                    end]]
                     
                     item.Visible = not isExpired
                 end
