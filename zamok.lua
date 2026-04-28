@@ -3,14 +3,14 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = game.Players.LocalPlayer
 local pGui = player:WaitForChild("PlayerGui")
 
--- Настройки
+-- ГЌГ Г±ГІГ°Г®Г©ГЄГЁ
 local LOCK_KEY = Enum.KeyCode.R
 local BACKPACK_NAME = "BackpackGui"
-local CLICK_DELAY = 0.1 -- Скорость кликов (0.1 сек = 10 кликов в секунду)
+local CLICK_DELAY = 0.05 -- Г‘ГЄГ®Г°Г®Г±ГІГј ГЄГ«ГЁГЄГ®Гў (0.1 Г±ГҐГЄ = 10 ГЄГ«ГЁГЄГ®Гў Гў Г±ГҐГЄГіГ­Г¤Гі)
 
-local isLooping = false -- Состояние (включено/выключено)
+local isLooping = false -- Г‘Г®Г±ГІГ®ГїГ­ГЁГҐ (ГўГЄГ«ГѕГ·ГҐГ­Г®/ГўГ»ГЄГ«ГѕГ·ГҐГ­Г®)
 
--- Функция для выполнения одного клика ПКМ по 3-му слоту
+-- Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї Г®Г¤Г­Г®ГЈГ® ГЄГ«ГЁГЄГ  ГЏГЉГЊ ГЇГ® 3-Г¬Гі Г±Г«Г®ГІГі
 local function doLockClick()
     local bgui = pGui:FindFirstChild(BACKPACK_NAME)
     local hotbar = bgui and bgui:FindFirstChild("Hotbar", true)
@@ -33,7 +33,7 @@ local function doLockClick()
             local x = slot3.AbsolutePosition.X + (slot3.AbsoluteSize.X / 2)
             local y = slot3.AbsolutePosition.Y + (slot3.AbsoluteSize.Y / 2) + 58
             
-            -- Эмуляция клика
+            -- ГќГ¬ГіГ«ГїГ¶ГЁГї ГЄГ«ГЁГЄГ 
             VirtualInputManager:SendMouseMoveEvent(x, y, game)
             VirtualInputManager:SendMouseButtonEvent(x, y, 1, true, game, 1)
             task.wait(0.02)
@@ -46,25 +46,25 @@ UserInputService.InputBegan:Connect(function(input, processed)
     if processed then return end
     
     if input.KeyCode == LOCK_KEY then
-        isLooping = not isLooping -- Переключаем состояние
+        isLooping = not isLooping -- ГЏГҐГ°ГҐГЄГ«ГѕГ·Г ГҐГ¬ Г±Г®Г±ГІГ®ГїГ­ГЁГҐ
         
         if isLooping then
-            print("АВТО-ЗАМОК: ВКЛЮЧЕН")
+            print("ГЂГ‚Г’ГЋ-Г‡ГЂГЊГЋГЉ: Г‚ГЉГ‹ГћГ—Г…ГЌ")
             
-            -- 1. Сначала один раз открываем инвентарь
+            -- 1. Г‘Г­Г Г·Г Г«Г  Г®Г¤ГЁГ­ Г°Г Г§ Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГЁГ­ГўГҐГ­ГІГ Г°Гј
             local bgui = pGui:FindFirstChild(BACKPACK_NAME)
             local inventory = bgui and bgui:FindFirstChild("Backpack") and bgui.Backpack:FindFirstChild("Inventory")
             if inventory then
                 inventory.Visible = true
             end
             
-            -- 2. Запускаем бесконечный цикл в отдельном потоке
+            -- 2. Г‡Г ГЇГіГ±ГЄГ ГҐГ¬ ГЎГҐГ±ГЄГ®Г­ГҐГ·Г­Г»Г© Г¶ГЁГЄГ« Гў Г®ГІГ¤ГҐГ«ГјГ­Г®Г¬ ГЇГ®ГІГ®ГЄГҐ
             task.spawn(function()
                 while isLooping do
                     doLockClick()
                     task.wait(CLICK_DELAY)
                 end
-                print("АВТО-ЗАМОК: ВЫКЛЮЧЕН")
+                print("ГЂГ‚Г’ГЋ-Г‡ГЂГЊГЋГЉ: Г‚Г›ГЉГ‹ГћГ—Г…ГЌ")
             end)
         end
     end
