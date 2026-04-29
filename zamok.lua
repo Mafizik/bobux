@@ -17,8 +17,8 @@ screenGui.ResetOnSpawn = false
 
 local toggleButton = Instance.new("TextButton")
 toggleButton.Name = "ToggleButton"
-toggleButton.Size = UDim2.new(0, 150, 0, 50)
-toggleButton.Position = UDim2.new(0, 20, 0.25, -25) -- Слева по центру
+toggleButton.Size = UDim2.new(0, 400, 0, 50)
+toggleButton.Position = UDim2.new(0, 30, 0.25, -25) -- Слева по центру
 toggleButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Красный (выключено)
 toggleButton.Text = "AUTO-LOCK: OFF"
 toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
