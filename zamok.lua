@@ -5,7 +5,7 @@ local pGui = player:WaitForChild("PlayerGui")
 
 -- Настройки
 local BACKPACK_NAME = "BackpackGui"
-local CLICK_DELAY = 0.05 
+local CLICK_DELAY = 0.01
 
 local isLooping = false 
 
